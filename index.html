@@ -11,20 +11,19 @@
 
     <div class="header">
       <h6 class="selectColor">Select Color</h6>
-      <button id="popup" onclick="selectSize()">Select</button> <!-- ///* Event listener added *// -->
+      <button id="popup">Select</button>
       
     </div>
 
 
 
     <div class="board"></div>
-
     
     
     <div class="footer">
-      <button>Black</button>
-      <button>Random</button>
-      <button>Clear</button>
+      <button id="black" onclick="setColor('black')">Black</button>
+      <button  id="random" onclick="setColor('random')">Random</button>
+      <button id="clear" onclick="clearBoard()">Clear</button>
 
     </div>
 
