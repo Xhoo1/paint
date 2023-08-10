@@ -26,6 +26,7 @@ function createBoard(size) {
     let box = document.createElement("div");
 
     box.addEventListener("mouseover", colorDiv);
+    box.addEventListener("touchmove", colorDivOnTouch); 
 
     board.insertAdjacentElement("beforeend", box);
   }
@@ -46,17 +47,29 @@ function selectSize() {
   }
 }
 
-function colorDiv() {
-if( color == 'random'){
+function colorDivOnTouch(event) {
+  event.preventDefault(); // Prevent default touch behavior
 
-this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`
-
-} else{
-
-  this.style.backgroundColor = 'black';
+  if (color === "random") {
+    this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+  } else {
+    this.style.backgroundColor = color;
+  }
 }
 
+
+function colorDiv(event) {
+  if (event.type === "mouseover") {
+    if (color === "random") {
+      this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else {
+      this.style.backgroundColor = color;
+    }
+  } else if (event.type === "touchmove") {
+    colorDivOnTouch.call(this, event.touches[0]); // Call the touch function with the first touch point
+  }
 }
+
 
 function setColor(colorChoice) {
 color = colorChoice;
